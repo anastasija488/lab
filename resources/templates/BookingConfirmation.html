@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Booking - Confirmation</title>
+  <style type="text/css">
+    body {
+      width: 800px;
+      margin: auto;
+    }
+    table {
+      width:100%;
+    }
+    table, td, th {
+      border: 1px solid black;
+      padding: 3px 2px;
+    }
+  </style>
+</head>
+<body>
+<section>
+  <header>
+    <h1>Event Booking page - Booking confirmation </h1>
+  </header>
+  <table>
+    <tr>
+      <th colspan="2">
+        Your Booking Status
+      </th>
+    </tr>
+    <tr>
+      <td><b>Attendee Name </b></td>
+      <td th:text="${hostName} ?: 'Petko Petkov'"></td>
+    </tr>
+    <tr>
+      <td><b>Client IP Address</b></td>
+      <td th:text="${hostAddress} ?: '127.0.0.1'"></td>
+    </tr>
+    <tr>
+      <td><b>Booking for Event</b></td>
+      <td th:text="${eventName} ?: 'Oppenheimer'"></td>
+    </tr>
+    <tr>
+      <td><b>Number of tickets</b></td>
+      <td th:text="${numOfTickets} ?: '2'">2</td>
+    </tr>
+  </table>
+  <br>
+  <form th:method="GET" th:action="@{/events/event-booking}">
+    <label for="bookingSearch">Search Booking By Name</label>
+    <input type="text" id="bookingSearch" name="bookingSearch">
+    <br>
+    <input type="submit" value="submit" />
+  </form>
+  <br/>
+  <div th:each="savedBooking : ${savedBookingList}">
+    <table>
+      <tr>
+        <td>Event name: <th:block th:text="${savedBooking.getEventName()}"></th:block></td>
+      </tr>
+      <tr>
+        <td>Number of tickets: <th:block th:text="${savedBooking.getNumberOfTickets()}"></th:block></td>
+      </tr>
+    </table>
+    <br>
+  </div>
+</section>
+</body>
+</html>
